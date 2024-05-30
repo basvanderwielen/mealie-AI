@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: python app.py
+    volumes:
+      - .:/app
+    ports:
+      - "5001:5000"
