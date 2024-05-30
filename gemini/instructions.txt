@@ -1,0 +1,82 @@
+The image contains a recipe. Perform OCR.
+If the recipe is in a different language, translate it to Dutch.
+Then correct the structure, grammar, and spelling for the following recipe. It was extracted with OCR, so ingredients and directions may be out of order. Do not paraphrase. Include all the original directions. Format the recipe in JSON and ensure it is a valid JSON. The following rules MUST be followed:
+1) Ingredients require both note and display. They should be the same value.
+2) Ingredients MUST have a referenceId which is a UUIDv4. Generate a unique one per ingredient.
+3) Instructions should be broken down into discreet steps with grammar and spelling
+4) Instructions MUST have an ingredientReferences property which should be set to an empty array like `"ingredientReferences": []`. DO NOT MAP INGREDIENTS.
+5) Notes require both a title and text. It should include an import statement, changelog, as well as commentary. Be opportunistic about your commentary. If there are no corrections, there is no need to include it in the notes.
+The possible attributes are as follows: name, description, recipeYield, totalTime, prepTime, cookTime, preformTime, recipeIngredient, recipeInstructions, and notes.
+
+Example:
+Oreo Truffles
+ecipes
+1 pkg. Oreo cookies • 1(80z) pkg cream cheese, softened
+1 pkg. vanilla candy coating
+Crush Oreos in a food processor ontil smooth. Add cream cheese t process til smooth. Scoop into l in. ballot roll by hand; put baus on sheet pan + chill in fridge til firm. Melt coating in microwave or double boiler until smooth. Drop balls into choc.
+coat
+bEeNeR. Replace on pant chill. Vields 30
+
+JSON:
+
+{
+    "name": "Oreo Truffles",
+    "recipeYield": "30",
+    "recipeIngredient": [
+        {
+            "note": "1 package Oreo cookies",
+            "display": "1 package Oreo cookies",
+            "referenceId": "28888c16-7766-4ef6-845f-bbfb6cd19407"
+        },
+        {
+            "note": "1 (8 oz) package cream cheese, softened",
+            "display": "1 (8 oz) package cream cheese, softened",
+            "referenceId": "97a224c7-ee4f-4811-98db-72b824df262e"
+        },
+        {
+            "note": "1 package vanilla candy coating",
+            "display": "1 package vanilla candy coating",
+            "referenceId": "22c8a319-d10f-48a7-988d-6e9bf05c46ae"
+        }
+    ],
+   "recipeInstructions": [
+        {
+            "text": "Crush Oreos in a food processor until smooth.",
+            "ingredientReferences": []
+        },
+        {
+            "text": "Add cream cheese and process until smooth.",
+            "ingredientReferences": []
+        },
+        {
+            "text": "Scoop into l-inch balls rolled by hand.",
+            "ingredientReferences": []
+        },
+        {
+            "text": "Put balls on sheet pan and chill in fridge until firm.",
+            "ingredientReferences": []
+        },
+        {
+            "text": "Melt coating in microwave or double boiler until smooth.",
+            "ingredientReferences": []
+        },
+        {
+            "text": "Drop balls into chocolate and coat. Replace on pan and chill.",
+            "ingredientReferences": []
+        },
+    ],
+    "notes": [
+        {
+            "title": "Import Statement"
+            "text": "Imported via image scan processed by Google Gemini. Check for accuracy before making."
+        },
+        {
+            "title": "Corrections"
+            "text": "Changed /80z/ to /8 oz/ in the cream cheese ingredient\nChanged /ontil/ to /until/ in the first instruction.\nChanged /t/ to /and/ in the second instruction.\nChanged /til/ to /until/ in the second instruction.\nChanged /ballot/ to /balls/ in the third instruction and rephrased.\nChanged /pant/ to /pan/ in the last instruction."
+        },
+        {
+            "title": "Commentary"
+            "text": "This sounds like a delicious recipe
+        },
+    ]
+}
