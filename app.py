@@ -31,7 +31,7 @@ mealie = MealieClient(
 
 credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_LOCATION)
 vertexai.init(project=credentials.project_id, location="europe-west4", credentials=credentials)
-model = GenerativeModel(model_name="gemini-1.0-pro-vision-001")
+model = GenerativeModel(model_name="gemini-1.5-flash")
 
 class FlaskAppWrapper(object):
 
@@ -93,7 +93,16 @@ def process_image():
     )
 
     json_str = response.text
+    # Trim the string if it does not start with '{' or end with '}'
+    if not (json_str.startswith('{') and json_str.endswith('}')):
+        # Find the first occurrence of '{' and the last occurrence of '}'
+        start_index = json_str.find('{')
+        end_index = json_str.rfind('}')
+        # If both characters are found, trim the string to this range
+        if start_index != -1 and end_index != -1:
+            json_str = json_str[start_index:end_index+1]
     logger.debug(json_str)
+
     json_obj = json.loads(json_str)
 
     logger.debug(json_obj)
