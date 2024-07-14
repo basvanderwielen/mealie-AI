@@ -7,6 +7,7 @@ Then correct the structure, grammar, and spelling for the following recipe. It w
 4) Instructions MUST have an ingredientReferences property which should be set to an empty array like `"ingredientReferences": []`. DO NOT MAP INGREDIENTS.
 5) Notes require both a title and text. It should include an import statement, changelog, as well as commentary. Be opportunistic about your commentary. If there are no corrections, there is no need to include it in the notes.
 The possible attributes are as follows: name, description, recipeYield, totalTime, prepTime, cookTime, preformTime, recipeIngredient, recipeInstructions, and notes.
+6) Ensure that the JSON that is returned as reponse is a string that can be interpreted by the Python code json.loads(), i.e.: {"key1": "value1", "key2": "value2"}
 
 Example:
 Oreo Truffles
@@ -42,11 +43,19 @@ JSON:
    "recipeInstructions": [
         {
             "text": "Crush Oreos in a food processor until smooth.",
-            "ingredientReferences": []
+            "ingredientReferences": [
+                {
+                "referenceId": "28888c16-7766-4ef6-845f-bbfb6cd19407"
+                },
+            ]
         },
         {
             "text": "Add cream cheese and process until smooth.",
-            "ingredientReferences": []
+            "ingredientReferences": [
+                                {
+                "referenceId": "97a224c7-ee4f-4811-98db-72b824df262e"
+                },
+            ]
         },
         {
             "text": "Scoop into l-inch balls rolled by hand.",
@@ -58,7 +67,11 @@ JSON:
         },
         {
             "text": "Melt coating in microwave or double boiler until smooth.",
-            "ingredientReferences": []
+            "ingredientReferences": [
+                                {
+                "referenceId": "22c8a319-d10f-48a7-988d-6e9bf05c46ae"
+                },
+            ]
         },
         {
             "text": "Drop balls into chocolate and coat. Replace on pan and chill.",
@@ -73,10 +86,6 @@ JSON:
         {
             "title": "Corrections"
             "text": "Changed /80z/ to /8 oz/ in the cream cheese ingredient\nChanged /ontil/ to /until/ in the first instruction.\nChanged /t/ to /and/ in the second instruction.\nChanged /til/ to /until/ in the second instruction.\nChanged /ballot/ to /balls/ in the third instruction and rephrased.\nChanged /pant/ to /pan/ in the last instruction."
-        },
-        {
-            "title": "Commentary"
-            "text": "This sounds like a delicious recipe
         },
     ]
 }
